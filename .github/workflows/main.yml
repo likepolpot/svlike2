@@ -2,7 +2,7 @@ name: Daily SSH Connection and Command
 
 on:
   schedule:
-    - cron: '0 19 * * *'  # 19:00 UTC, which is 03:00 AM Beijing time
+    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 jobs:
