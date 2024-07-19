@@ -1,0 +1,26 @@
+name: Daily SSH Connection and Command
+
+on:
+  schedule:
+    - cron: '0 19 * * *'  # 19:00 UTC, which is 03:00 AM Beijing time
+  workflow_dispatch:
+
+jobs:
+  run-command:
+    name: Run SSH Command
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install sshpass
+      run: sudo apt-get install -y sshpass
+
+    - name: Execute SSH command
+      run: |
+        sshpass -p "Asdqwe123" ssh -o StrictHostKeyChecking=no -p 22 svlike1@s7.serv00.com "cd ~/domains/\$USER.serv00.net/vless && ./check_vless.sh -p 43017"
+
+    - name: 发送Telegram消息
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
