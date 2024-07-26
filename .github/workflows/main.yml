@@ -1,24 +1,22 @@
-name: CT8保活
+name: Daily SSH Connection and Command
 
 on:
   schedule:
-    - cron: '0 * * * *'  # 每小时触发一次
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 jobs:
-  ssh_job:
+  run-command:
+    name: Run SSH Command
     runs-on: ubuntu-latest
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
     - name: Install sshpass
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y sshpass
+      run: sudo apt-get install -y sshpass
 
-    - name: Execute remote SSH command
+    - name: Execute SSH command
       run: |
         sshpass -p "Asdqwe123" ssh -o StrictHostKeyChecking=no -p 22 feifan16@s1.ct8.pl << EOF
           pm2 list
