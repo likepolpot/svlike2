@@ -14,12 +14,14 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install sshpass
-      run: sudo apt-get update && sudo apt-get install -y sshpass
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y sshpass
 
     - name: Execute remote SSH command
       run: |
         sshpass -p "Asdqwe123" ssh -o StrictHostKeyChecking=no -p 22 feifan16@s1.ct8.pl << EOF
-        pm2 list
-        sleep 3
-        pm2 resurrect
+          pm2 list
+          sleep 3
+          pm2 resurrect
         EOF
