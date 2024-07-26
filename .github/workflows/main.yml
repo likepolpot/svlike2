@@ -2,7 +2,7 @@ name: Daily SSH Connection and Command
 
 on:
   schedule:
-    - cron: '*/30 * * * *'
+    - cron: '* 1 * * *'
   workflow_dispatch:
 
 jobs:
@@ -18,4 +18,4 @@ jobs:
 
     - name: Execute SSH command
       run: |
-        sshpass -p "Asdqwe123" ssh -o StrictHostKeyChecking=no -p 22 svlike2@s7.serv00.com "cd ~/domains/\$USER.serv00.net/vless && ./check_vless.sh -p 43017"
+        sshpass -p "Asdqwe123" ssh -o StrictHostKeyChecking=no -p 22 feifan16@s1.ct8.pl "pm2 resurrect"
