@@ -16,11 +16,10 @@ jobs:
     - name: Execute SSH commands
       uses: appleboy/ssh-action@v0.1.5
       with:
-        host: s1.ct8.pl
+        IPv6: s1.ct8.pl
         username: feifan16
         password: Asdqwe123
         port: 22
         script: |
           pm2 list
-          sleep 3
           pm2 resurrect
